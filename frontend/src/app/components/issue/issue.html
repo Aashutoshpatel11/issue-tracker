@@ -1,40 +1,10 @@
-<div class="flex" >
-    <input 
-    class="bg-gray-900 border-r border-gray-700 p-2 pl-3 pr-3 w-1/12"
-    type="text"
-    readonly
-    value="{{Issue.Id}}"
-    >
-    <input 
-    class="bg-gray-900 border-r border-gray-700 p-2 pl-3 pr-3 w-full"
-    type="text"
-    readonly
-    value="title"
-    >
-    <input 
-    class="bg-gray-900 border-r border-gray-700 p-2 pl-3 pr-3 w-1/6"
-    type="text"
-    readonly
-    value="status"
-    >
-    <input 
-    class="bg-gray-900 border-r border-gray-700 p-2 pl-3 pr-3 w-1/6"
-    type="text"
-    readonly
-    value="priority"
-    >
-    <input 
-    class="bg-gray-900 border-r border-gray-700 p-2 pl-3 pr-3 w-1/6"
-    type="text"
-    readonly
-    value="assignee"
-    >
-    <input 
-    class="bg-gray-900 p-2 pl-3 pr-3 w-1/6"
-    type="text"
-    readonly
-    value="updatedAt"
-    >
-    
+<div *ngFor="let issue of data" class="flex items-center cursor-pointer hover:bg-gray-800" (click)="viewDetails(issue.id)">
+  <div class="p-2 pl-3 pr-3 w-1/12">{{issue.id}}</div>
+  <div class="p-2 pl-3 pr-3 w-full">{{issue.title}}</div>
+  <div class="p-2 pl-3 pr-3 w-1/6">{{issue.status}}</div>
+  <div class="p-2 pl-3 pr-3 w-1/6">{{issue.priority}}</div>
+  <div class="p-2 pl-3 pr-3 w-1/6">{{issue.assignee}}</div>
+  <div class="p-2 pl-3 pr-3 w-1/6">{{issue.updated_at | date: 'short'}}</div>
+  <a [routerLink]="['/issues', issue.id, 'edit']" (click)="$event.stopPropagation()" class="bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-500 p-2 ml-2">Edit</a>
 </div>
-<div class="border-b border-gray-700 p-1 ml-3 mr-3" ></div>
+<div class="border-b border-gray-700 p-1 ml-3 mr-3"></div>
