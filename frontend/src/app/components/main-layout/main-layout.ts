@@ -10,4 +10,4 @@ import { SubHeader } from '../sub-header/sub-header';
   standalone: true,
   imports: [RouterModule, Header, SubHeader],
 })
-export class MainLayoutComponent {}
+export class MainLayout {}
