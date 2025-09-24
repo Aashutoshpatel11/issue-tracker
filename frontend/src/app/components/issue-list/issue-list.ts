@@ -21,11 +21,23 @@ export class IssueListComponent implements OnInit {
   page = 1;
   pageSize = 5;
   total = 0;
+  assignees: string[] = [];
 
   constructor(private issueService: IssueService) {}
 
   ngOnInit(): void {
     this.loadIssues();
+    this.loadAssignees();
+  }
+
+  loadAssignees(): void {
+    this.issueService.getIssues({ page_size: 1000 }).subscribe(response => {
+      if (response && response.issues) {
+        const allAssignees = response.issues.map((issue: Issue) => issue.assignee).filter(Boolean);
+        // Using Array.from() is a more type-safe way to convert a Set to an Array
+        this.assignees = Array.from(new Set(allAssignees));
+      }
+    });
   }
 
   loadIssues(): void {
@@ -73,3 +85,4 @@ export class IssueListComponent implements OnInit {
     }
   }
 }
+
