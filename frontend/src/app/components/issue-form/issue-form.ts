@@ -38,13 +38,10 @@ export class IssueFormComponent implements OnInit {
 
   saveIssue(): void {
     if (this.issue.id) {
-      // This is an existing issue, so we update it.
       this.issueService.updateIssue(this.issue.id, this.issue).subscribe(() => {
         this.router.navigate(['/']);
       });
     } else {
-      // This is a new issue, so we create it.
-      // We explicitly create an object with only the fields the backend expects for creation.
       const newIssue = {
         title: this.issue.title,
         status: this.issue.status,
