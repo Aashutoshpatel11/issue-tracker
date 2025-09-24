@@ -1,42 +1,42 @@
 <div class="p-8 " >
-    <div class="border border-gray-700 rounded-lg p-7 bg-gray-900 " >
+    <div class="border border-gray-700 rounded-lg p-7 bg-zinc-900 " >
         <div class="mb-6" >
             <h4 class="font-normal text-lg text-white" >Filters</h4>
             <h5>Filter and search issues to find what you're looking for</h5>
         </div>
         <div class=" flex justify-between items-center" >
             <input
-            type="text" 
-            placeholder="Search issues by title..." 
-            class="font-thin text-sm p-2 rounded-md w-2/3 bg-black text-white border border-gray-600 focus:outline-none focus:border-blue-500" />
-            <select name="status" id="">
-                <option value="All Status">All Status</option>
+              type="text"
+              placeholder="Search issues by title..."
+              class="font-thin text-sm p-2 rounded-md w-2/3 bg-black text-gray-400 border border-gray-600 focus:outline-none focus:border-blue-500"
+              [(ngModel)]="search"
+              (input)="loadIssues()"
+            />
+            <select class="font-thin text-sm p-2 rounded-md bg-black text-gray-400 border border-gray-600 focus:border-blue-500 " name="status" [(ngModel)]="status" (change)="loadIssues()">
+                <option value="">All Status</option>
                 <option value="Pending">Pending</option>
                 <option value="Resolved">Resolved</option>
             </select>
-            <select name="priority" id="">
-                <option value="All Priority">All Priority</option>
+            <select class="font-thin text-sm p-2 rounded-md bg-black text-gray-400 border border-gray-600 focus:border-blue-500" name="priority" [(ngModel)]="priority" (change)="loadIssues()">
+                <option value="">All Priority</option>
                 <option value="High">High</option>
                 <option value="Medium">Medium</option>
                 <option value="Low">Low</option>
             </select>
-            <select name="assignees" id="">
-                <option value="All Assignees">All Assignees</option>
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
+            <select class="font-thin text-sm p-2 rounded-md bg-black text-gray-400 border border-gray-600 focus:border-blue-500" name="assignees" [(ngModel)]="assignee" (change)="loadIssues()">
+                <option value="">All Assignees</option>
             </select>
-            <button>x  clear</button>
+            <button (click)="clearFilters()">x  clear</button>
         </div>
     </div>
 </div>
 <div class="p-8 " >
-    <div class="border border-gray-700 rounded-lg p-7 bg-gray-900 " >
+    <div class="border border-gray-700 rounded-lg p-7 bg-zinc-900 " >
         <div class="flex justify-between items-center mb-5" >
-            <h4 class="font-normal text-lg text-white" >Issues()</h4>
+            <h4 class="font-normal text-lg text-white" >Issues ({{total}})</h4>
             <div class="flex " >
                 <p class="mr-3" >Show:</p>
-                <select name="paginate" id="">
+                <select name="paginate" [value]="pageSize" (change)="onPageSizeChange($event)">
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="15">15</option>
@@ -44,7 +44,20 @@
                 </select>
             </div>
         </div>
-        <app-issue [data]="Issues"></app-issue>
-
+        <div class="flex font-bold">
+            <div class="p-2 pl-3 pr-3 w-1/12">Id</div>
+            <div class="p-2 pl-3 pr-3 w-full">Title</div>
+            <div class="p-2 pl-3 pr-3 w-1/6">Status</div>
+            <div class="p-2 pl-3 pr-3 w-1/6">Priority</div>
+            <div class="p-2 pl-3 pr-3 w-1/6">Assignee</div>
+            <div class="p-2 pl-3 pr-3 w-1/6">Updated At</div>
+            <div class="bg-zinc-900 font-semibold p-2 ml-2">Edit</div>
+        </div>
+        <div class="border-b border-gray-700 p-1 ml-3 mr-3"></div>
+        <app-issue [data]="issues"></app-issue>
+        <div class="flex justify-end mt-4">
+            <button class="bg-gray-700 text-white font-semibold rounded-md p-2 mr-2" (click)="previousPage()">Previous</button>
+            <button class="bg-gray-700 text-white font-semibold rounded-md p-2" (click)="nextPage()">Next</button>
+        </div>
     </div>
 </div>
