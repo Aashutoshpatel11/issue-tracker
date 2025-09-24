@@ -1,0 +1,63 @@
+<div class="p-8">
+  <div class="border border-gray-700 rounded-lg p-7 bg-zinc-900">
+    <h2 class="text-2xl font-bold text-white mb-4">{{ issue.id ? 'Edit' : 'New' }} Issue</h2>
+    <form (ngSubmit)="saveIssue()">
+      <div class="" >
+        <div class="mb-4 ">
+          <label for="title" class="block text-white font-semibold mb-2">Title</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            [(ngModel)]="issue.title"
+            class="w-full bg-black text-white border border-gray-600 rounded-md p-2"
+            required
+          />
+        </div>
+        <div class="flex justify-start" >
+          <div class="mb-4 w-56 mr-5">
+            <label for="status" class="block text-white font-semibold mb-2">Status</label>
+            <select
+              id="status"
+              name="status"
+              [(ngModel)]="issue.status"
+              class="w-full bg-black text-white border border-gray-600 rounded-md p-2"
+            >
+              <option value="Pending">Pending</option>
+              <option value="Resolved">Resolved</option>
+            </select>
+          </div>
+          <div class="mb-4 w-56 ml-5">
+            <label for="priority" class="block text-white font-semibold mb-2">Priority</label>
+            <select
+              id="priority"
+              name="priority"
+              [(ngModel)]="issue.priority"
+              class="w-full bg-black text-white border border-gray-600 rounded-md p-2"
+            >
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label for="assignee" class="block text-white font-semibold mb-2">Assignee</label>
+          <input
+            type="text"
+            id="assignee"
+            name="assignee"
+            [(ngModel)]="issue.assignee"
+            class="w-full bg-black text-white border border-gray-600 rounded-md p-2"
+          />
+        </div>
+      </div>
+      <button type="submit" class="bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-500 p-2">
+        {{ issue.id ? 'Update' : 'Create' }} Issue
+      </button>
+      <button type="button" (click)="cancel()" class="bg-gray-700 text-white font-semibold rounded-md p-2 ml-2">
+        Cancel
+      </button>
+    </form>
+  </div>
+</div>
